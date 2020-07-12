@@ -13,6 +13,9 @@ import { ShoppingListComponent } from './features/shopping-list/shopping-list.co
 import { ShoppingEditComponent } from './features/shopping-list/shopping-edit/shopping-edit.component';
 import { CockpitComponent } from './lab-work/cockpit/cockpit.component';
 import { ServerElementComponent } from './lab-work/server-element/server-element.component';
+import { BasicHighlightDirective } from './directives/basic-highlight.directive';
+import { BetterHighlightDirective } from './directives/better-highlight.directive';
+import { UnlessDirective } from './directives/unless.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { ServerElementComponent } from './lab-work/server-element/server-element
     ShoppingListComponent,
     ShoppingEditComponent,
     CockpitComponent,
-    ServerElementComponent
+    ServerElementComponent,
+    BasicHighlightDirective,
+    BetterHighlightDirective,
+    UnlessDirective
   ],
   imports: [
     BrowserModule,

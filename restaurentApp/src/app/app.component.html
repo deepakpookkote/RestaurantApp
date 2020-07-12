@@ -23,11 +23,15 @@
     <div class="col-sm-12">
       <app-server-element [srvElement]="serverElements" *ngFor="let serverElements of serverElements">
         <p>
-          <strong *ngIf="serverElements.type === 'server'" style="color: red;">{{serverElements.content}}</strong>
-          <em *ngIf="serverElements.type === 'blueprint'">{{serverElements.content}}</em>
+          <strong class="text-white"  *ngIf="serverElements.type === 'server'" style="color: red;">{{serverElements.content}}</strong>
+          <em class="text-white" *ngIf="serverElements.type === 'blueprint'">{{serverElements.content}}</em>
       </p>
       </app-server-element>
     </div>
 </div>
+<p appBasicHighlight>Basic Directive</p>
+<p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'purple'">Better Way Directive</p>
 </div>
+<div *appUnless="dummyCondition">Helloooo</div>
+<div *ngIf="!dummyCondition">Baby</div>
 <!--@end experiment-->

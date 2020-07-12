@@ -13,6 +13,8 @@ export class AppComponent {
     content: 'just a test'
   }];
 
+  dummyCondition: true;
+
 
   onServerAdded(serverData: {serverName: string, serverContent: string}) {
     this.serverElements.push({
