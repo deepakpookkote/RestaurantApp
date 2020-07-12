@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,8 @@ import { RecipeDetailsComponent } from './features/recipe/recipe-details/recipe-
 import { RecipeItemComponent } from './features/recipe/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingListComponent } from './features/shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './features/shopping-list/shopping-edit/shopping-edit.component';
+import { CockpitComponent } from './lab-work/cockpit/cockpit.component';
+import { ServerElementComponent } from './lab-work/server-element/server-element.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +23,14 @@ import { ShoppingEditComponent } from './features/shopping-list/shopping-edit/sh
     RecipeDetailsComponent,
     RecipeItemComponent,
     ShoppingListComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    CockpitComponent,
+    ServerElementComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
