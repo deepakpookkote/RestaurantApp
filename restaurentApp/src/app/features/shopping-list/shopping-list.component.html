@@ -12,8 +12,22 @@
                 class="list-group-item"
                 (click)="onEditItem(i)"
                 style="cursor: pointer">
-                {{item.name}} ({{item.amount}}) <span class="float-right" (click)="removeItem(item)">X</span>
+                {{item.name | uppercase}} ({{item.amount}}) <span class="float-right" (click)="removeItem(item)">X</span>
             </a>
         </ul>
     </div>
+</div>
+<p>{{today | date: 'fullDate' | uppercase}}</p>
+<p>{{myName | shorten}}</p>
+
+<div class="row">
+    <input type="text" [(ngModel)]="filteredStatus">
+    <!-- <div class="content"> -->
+        <ul *ngFor="let item of users | filter: filteredStatus:'name'">
+            <li>{{item.name}}</li>
+            <li>{{item.age}}</li>
+        </ul>
+        <h2>UserName: {{userName | async}}</h2>
+    <!-- </div> -->
+    <button type="button" class="btn btn-primary" (click)="addUser()">Add</button>
 </div>

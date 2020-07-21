@@ -14,6 +14,8 @@ import { ShoppingEditComponent } from './features/shopping-list/shopping-edit/sh
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { RecipeStartComponent } from './features/recipe/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './features/recipe/recipe-edit/recipe-edit.component';
+import { ShortenPipe } from './features/shopping-list/shorten.pipe';
+import { FilterPipe } from './features/shopping-list/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { RecipeEditComponent } from './features/recipe/recipe-edit/recipe-edit.c
     ShoppingEditComponent,
     DropdownDirective,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    ShortenPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
