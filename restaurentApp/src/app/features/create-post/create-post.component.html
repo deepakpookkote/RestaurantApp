@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-12">
+    <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
+      <div class="form-group">
+        <label>Title</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          class="form-control"
+          ngModel
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label>Content</label>
+        <textarea
+          type="text"
+          name="content"
+          id="content"
+          ngModel
+          rows="6"
+          class="form-control"
+          required
+        ></textarea>
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!postForm.valid"
+      >
+        Send
+      </button>
+    </form>
+  </div>
+  <div class="row">
+    <button (click)="getPosts()" class="btn btn-primary" type="button">
+      Fetch Posts
+    </button>
+    <button (click)="deletePosts()" class="btn btn-primary" type="button">
+      Delete All
+    </button>
+  </div>
+</div>
+<div>
+  <div class="row">
+    <p *ngIf="loadedPosts.length < 1 && !isLoading">No Post available!</p>
+    <div class="col-md-6" *ngIf="loadedPosts.length >=1 && !isLoading">
+      <div class="card" *ngFor="let post of loadedPosts">
+        <div class="card-title">{{post.title}}</div>
+        <p>{{post.content}}</p>
+      </div>
+    </div>
+    <p *ngIf="isLoading && !isError">Loading...</p>
+    <p *ngIf="isError" class="alert alert-danger">Some Error occurred!!</p>
+    <p>{{isError}}</p>
+  </div>
+</div>
