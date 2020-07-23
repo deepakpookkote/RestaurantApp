@@ -7,16 +7,21 @@ import { AuthService } from './shared/auth.service';
 import { RecipeStartComponent } from './features/recipe/recipe-start/recipe-start.component';
 import { RecipeDetailsComponent } from './features/recipe/recipe-details/recipe-details.component';
 import { RecipeEditComponent } from './features/recipe/recipe-edit/recipe-edit.component';
+import { CreatePostComponent } from './features/create-post/create-post.component';
+import { RecipesResolver } from './features/recipe/recipe-resolver.service';
 
 const routes: Routes = [
-  { pathMatch: 'full', path: '', redirectTo: '/recipes'},
-  { path: 'recipes', component: RecipeComponent, children: [
-    {path: '', component: RecipeStartComponent},
-    {path: 'new', component: RecipeEditComponent},
-    {path: ':id', component: RecipeDetailsComponent},
-    {path: ':id/edit', component: RecipeEditComponent},
-  ]  },
-  { path: 'shopping-list', component: ShoppingListComponent }
+  { pathMatch: 'full', path: '', redirectTo: '/recipes' },
+  {
+    path: 'recipes', component: RecipeComponent, children: [
+      { path: '', component: RecipeStartComponent },
+      { path: 'new', component: RecipeEditComponent },
+      { path: ':id', component: RecipeDetailsComponent, resolve: [RecipesResolver] },
+      { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipesResolver] },
+    ]
+  },
+  { path: 'shopping-list', component: ShoppingListComponent },
+  { path: 'posts', component: CreatePostComponent }
 ];
 
 @NgModule({
