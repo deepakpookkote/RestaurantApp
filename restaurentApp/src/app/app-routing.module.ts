@@ -9,11 +9,15 @@ import { RecipeDetailsComponent } from './features/recipe/recipe-details/recipe-
 import { RecipeEditComponent } from './features/recipe/recipe-edit/recipe-edit.component';
 import { CreatePostComponent } from './features/create-post/create-post.component';
 import { RecipesResolver } from './features/recipe/recipe-resolver.service';
+import { AuthComponent } from './auth/auth.component';
+import { AuthGaurd } from './auth/auth-gaurd';
 
 const routes: Routes = [
   { pathMatch: 'full', path: '', redirectTo: '/recipes' },
   {
-    path: 'recipes', component: RecipeComponent, children: [
+    path: 'recipes', component: RecipeComponent,
+    canActivate: [AuthGaurd],
+    children: [
       { path: '', component: RecipeStartComponent },
       { path: 'new', component: RecipeEditComponent },
       { path: ':id', component: RecipeDetailsComponent, resolve: [RecipesResolver] },
@@ -21,7 +25,8 @@ const routes: Routes = [
     ]
   },
   { path: 'shopping-list', component: ShoppingListComponent },
-  { path: 'posts', component: CreatePostComponent }
+  { path: 'posts', component: CreatePostComponent },
+  { path: 'auth', component: AuthComponent },
 ];
 
 @NgModule({

@@ -18,6 +18,8 @@ import { RecipeEditComponent } from './features/recipe/recipe-edit/recipe-edit.c
 import { CreatePostComponent } from './features/create-post/create-post.component';
 import { AuthInterceptor } from './shared/auth-interceptor';
 import { LoginInterceptor } from './shared/logging-interceptor';
+import { AuthComponent } from './auth/auth.component';
+import { LodingSpinnerComponent } from './shared/loding-spinner/loding-spinner.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { LoginInterceptor } from './shared/logging-interceptor';
     DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    AuthComponent,
+    LodingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +46,8 @@ import { LoginInterceptor } from './shared/logging-interceptor';
     HttpClientModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    // {provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
