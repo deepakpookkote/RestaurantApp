@@ -20,6 +20,8 @@ import { AuthInterceptor } from './shared/auth-interceptor';
 import { LoginInterceptor } from './shared/logging-interceptor';
 import { AuthComponent } from './auth/auth.component';
 import { LodingSpinnerComponent } from './shared/loding-spinner/loding-spinner.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceHolderDirective } from './shared/placeholder/placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { LodingSpinnerComponent } from './shared/loding-spinner/loding-spinner.c
     RecipeEditComponent,
     CreatePostComponent,
     AuthComponent,
-    LodingSpinnerComponent
+    LodingSpinnerComponent,
+    AlertComponent,
+    PlaceHolderDirective
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,9 @@ import { LodingSpinnerComponent } from './shared/loding-spinner/loding-spinner.c
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
     // {provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AlertComponent
+  ]
 })
 export class AppModule { }
