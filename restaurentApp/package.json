@@ -7,7 +7,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "dev:ssr": "ng run restaurentApp:serve-ssr",
+    "serve:ssr": "node dist/restaurentApp/server/main.js",
+    "build:ssr": "ng build --prod && ng run restaurentApp:server:production",
+    "prerender": "ng run restaurentApp:prerender"
   },
   "private": true,
   "dependencies": {
@@ -18,8 +22,12 @@
     "@angular/forms": "~9.1.1",
     "@angular/platform-browser": "~9.1.1",
     "@angular/platform-browser-dynamic": "~9.1.1",
+    "@angular/platform-server": "~9.1.1",
     "@angular/router": "~9.1.1",
+    "@nguniversal/express-engine": "^9.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "^8.2.6",
     "bootstrap": "^4.5.0",
+    "express": "^4.15.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -29,6 +37,8 @@
     "@angular/cli": "~9.1.1",
     "@angular/compiler-cli": "~9.1.1",
     "@angular/language-service": "~9.1.1",
+    "@nguniversal/builders": "^9.1.1",
+    "@types/express": "^4.17.0",
     "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
