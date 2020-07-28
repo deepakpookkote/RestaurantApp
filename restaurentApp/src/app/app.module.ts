@@ -34,7 +34,7 @@ import { SharedModule } from './shared/shared.module';
     CreatePostComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
