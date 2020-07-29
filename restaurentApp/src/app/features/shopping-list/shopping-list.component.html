@@ -8,11 +8,11 @@
     <div class="col-md-12">
         <ul class="list-group">
             <a
-                *ngFor="let item of ingredients; let i=index"
+                *ngFor="let item of (ingredients | async).ingredients; let i=index"
                 class="list-group-item"
                 (click)="onEditItem(i)"
                 style="cursor: pointer">
-                {{item.name}} ({{item.amount}}) <span class="float-right" (click)="removeItem(item)">X</span>
+                {{item.name}} ({{item.amount}}) <span class="float-right">X</span>
             </a>
         </ul>
     </div>

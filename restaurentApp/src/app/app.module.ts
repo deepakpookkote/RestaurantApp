@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { AuthInterceptor } from './shared/auth-interceptor';
 // import { RecipesModule } from './features/recipe/recipes.module';
 // import { ShoppingModule } from './features/shopping-list/shopping.module';
 import { SharedModule } from './shared/shared.module';
+import { shoppingListReducer } from './features/shopping-list/store/shopping-list.reducer';
 // import { AuthModule } from './auth/auth.module';
 
 @NgModule({
@@ -39,6 +41,7 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    StoreModule.forRoot({shoppingList: shoppingListReducer}),
     SharedModule
   ],
   // exports: [
