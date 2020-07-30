@@ -1,8 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { PostService } from 'src/app/shared/post.service';
 import { LoginService } from 'src/app/auth/login.service';
-import { Subscription } from 'rxjs';
+import { Subscription, pipe } from 'rxjs';
 import { User } from 'src/app/auth/user.model';
+import { Store } from '@ngrx/store';
+import * as fromAppState from '../../store/app.reducer';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -17,10 +20,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Output() featureSelected = new EventEmitter<string>();
 
-  constructor(private dataService: PostService, private authService: LoginService) { }
+  constructor(private dataService: PostService, private authService: LoginService, private store: Store<fromAppState.AppState>) { }
 
   ngOnInit(): void {
-    this.authSubscription = this.authService.user.subscribe((userData => {
+    this.authSubscription = this.store.select('auth').pipe(map(authState => {
+      return authState.user;
+    })).subscribe((userData => {
       this.userInfo = userData;
       this.isAuthenticated = !!userData;
     }));

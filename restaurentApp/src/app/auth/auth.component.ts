@@ -1,10 +1,13 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
 import { LoginService, AuthResponseData } from './login.service';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { PlaceHolderDirective } from '../shared/placeholder/placeholder.directive';
+import * as fromAppState from '../store/app.reducer';
+import * as authActions from '../auth/store/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -21,9 +24,22 @@ export class AuthComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private authService: LoginService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(
+    private authService: LoginService,
+    private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private store: Store<fromAppState.AppState>
+  ) { }
 
   ngOnInit(): void {
+    this.store.select('auth').subscribe((authState) => {
+      this.isLoading = authState.loading;
+      this.isError = authState.authError;
+      if (this.isError && !this.isLoading) {
+        console.log(this.isError);
+        this.showErrorAlert(this.isError);
+      }
+    });
   }
 
   onSwitchMode() {
@@ -41,19 +57,23 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     this.isLoading = true;
     if (this.isLoginMode) {
-      authObs = this.authService.signIn(email, password);
+      // authObs = this.authService.signIn(email, password);
+      this.store.dispatch(new authActions.LoginStart({ email: email, password }));
     } else {
       authObs = this.authService.signUp(email, password);
     }
-    authObs.subscribe((resData) => {
-      console.log(resData);
-      this.router.navigate(['/recipes']);
-      this.isLoading = false;
-    }, error => {
-      this.isError = error; // wont be needing now
-      this.showErrorAlert(error);
-      this.isLoading = false;
-    });
+
+
+    // authObs.subscribe((resData) => {
+    //   console.log(resData);
+    //   this.router.navigate(['/recipes']);
+    //   this.isLoading = false;
+    // }, error => {
+    //   this.isError = error; // wont be needing now
+    //   this.showErrorAlert(error);
+    //   this.isLoading = false;
+    // });
+
     form.reset();
   }
 
@@ -62,9 +82,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   private showErrorAlert(errorMessage: string) {
-    // const alertComponent = new AlertComponent();
     const alertCompFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
-    // console.log(alertCompFactory,'fac');
     const hostViewContainerRef = this.alertHost.viewContainerRef;
     hostViewContainerRef.clear();
 

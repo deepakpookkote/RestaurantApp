@@ -26,8 +26,12 @@ import { AuthInterceptor } from './shared/auth-interceptor';
 // import { RecipesModule } from './features/recipe/recipes.module';
 // import { ShoppingModule } from './features/shopping-list/shopping.module';
 import { SharedModule } from './shared/shared.module';
-import { shoppingListReducer } from './features/shopping-list/store/shopping-list.reducer';
+// import { shoppingListReducer } from './features/shopping-list/store/shopping-list.reducer';
+// import { authReducer } from './auth/store/auth.reducer';
 // import { AuthModule } from './auth/auth.module';
+import * as fromApp from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,8 @@ import { shoppingListReducer } from './features/shopping-list/store/shopping-lis
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer}),
+    StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects]),
     SharedModule
   ],
   // exports: [
