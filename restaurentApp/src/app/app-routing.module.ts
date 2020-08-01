@@ -13,7 +13,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { CreatePostComponent } from './features/create-post/create-post.component';
 
 const routes: Routes = [
-  { pathMatch: 'full', path: '', redirectTo: '/auth' },
+  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   { path: 'posts', component: CreatePostComponent },
   { path: 'recipes', loadChildren: () => import('./features/recipe/recipes.module').then(m => m.RecipesModule)},
   { path: 'shopping-list', loadChildren: () => import('./features/shopping-list/shopping.module').then(m => m.ShoppingModule)},
