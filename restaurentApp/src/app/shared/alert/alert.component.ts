@@ -10,7 +10,6 @@ export class AlertComponent {
   @Output() close = new EventEmitter<void>();
 
   constructor() {
-    console.log('in');
    }
 
   onClose() {

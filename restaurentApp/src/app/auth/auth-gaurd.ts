@@ -22,19 +22,12 @@ export class AuthGaurd implements CanActivate {
             }),
             map(user => {
             const isAuth = !!user;
-            console.log(user,'user');
             if (isAuth) {
                 return true;
             } else {
-                console.log('dddhdhdh', user);
                 return this.router.createUrlTree(['/auth']);
             }
         })
-        // , tap(isAuth => {
-        //     if (!isAuth) {
-        //         this.router.navigate(['/auth']);
-        //     }
-        // })
         );
     }
 }

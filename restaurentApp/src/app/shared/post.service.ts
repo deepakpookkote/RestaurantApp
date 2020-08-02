@@ -50,7 +50,6 @@ export class PostService {
       observe: 'events'
     }).pipe(
       tap((event) => {
-        console.log(event);
       })
     );
   }

@@ -35,7 +35,6 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.isLoading = authState.loading;
       this.isError = authState.authError;
       if (this.isError && !this.isLoading) {
-        console.log(this.isError);
         this.showErrorAlert(this.isError);
       }
     });

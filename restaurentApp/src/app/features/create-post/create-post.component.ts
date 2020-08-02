@@ -24,16 +24,9 @@ export class CreatePostComponent implements OnInit {
   }
 
   onCreatePost(postData: Post) {
-    // this.http.post<{title: string, content: string}>(`${this.domain}/posts.json`, postData).subscribe((res) => {
-    //   console.log(res);
-    // }, error => {
-    //   console.log(error);
-    // });
     this.postService.createAndStorePost(postData).subscribe((res) => {
-      console.log(res);
       this.getPosts();
     }, error => {
-      console.log(error);
     });
   }
 
@@ -45,20 +38,6 @@ export class CreatePostComponent implements OnInit {
     }, error => {
       this.isError = error.error.error;
     });
-    // this.http.get(`${this.domain}/posts.json`).pipe(map((response: {[key: string]: Post}) => {
-    // this.http.get<{[key: string]: Post}>(`${this.domain}/posts.json`).pipe(map((response) => {
-    //   const postArray: Post[] = [];
-    //   for (const key in response) {
-    //     if (response.hasOwnProperty(key)) {
-    //       postArray.push({...response[key], id: key});
-    //     }
-    //   }
-    //   return postArray;
-    // })).subscribe((data) => {
-    //   console.log(data[0].title);
-    //   this.loadedPosts = data;
-    //   this.isLoading = false;
-    // });
   }
 
   deletePosts() {

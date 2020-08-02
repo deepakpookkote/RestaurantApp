@@ -88,9 +88,7 @@ export class AuthEffects {
     authRedirect = this.actions$.pipe(
         ofType(AuthActions.AUTHENTICATE_SUCCESS),
         tap(((authSuccessAction: AuthActions.AuthenticateSuccess) => {
-            console.log(authSuccessAction.payload.redirect,'authSuccessAction.payload.redirect');
             if (authSuccessAction.payload.redirect) {
-                console.log('test-ebfre')
                 this.router.navigate(['/']);
             }
         })

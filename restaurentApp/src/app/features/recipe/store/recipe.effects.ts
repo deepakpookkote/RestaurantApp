@@ -29,11 +29,7 @@ export class RecipeEffects {
     storeRecipes = this.actions$.pipe(
         ofType(RecipeActions.STORE_RECIPES),
         withLatestFrom(this.store.select('recipe')),
-        // map(data => {
-        //     console.log(data);
-        // })
         switchMap(([actionData, recipeState]) => {
-            console.log(actionData);
             return this.http.put(`${domain}/recipes.json`, recipeState.recipes);
         })
     );
