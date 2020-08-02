@@ -34,6 +34,7 @@ import { SharedModule } from './shared/shared.module';
 // import { AuthModule } from './auth/auth.module';
 import * as fromApp from './store/app.reducer';
 import { AuthEffects } from './auth/store/auth.effects';
+import { RecipeEffects } from './features/recipe/store/recipe.effects';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -49,7 +50,7 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, RecipeEffects]),
     StoreDevtoolsModule.instrument({logOnly: environment.production}),
     StoreRouterConnectingModule.forRoot(),
     SharedModule

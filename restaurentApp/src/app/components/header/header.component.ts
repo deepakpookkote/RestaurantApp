@@ -1,12 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { PostService } from 'src/app/shared/post.service';
-import { LoginService } from 'src/app/auth/login.service';
 import { Subscription, pipe } from 'rxjs';
 import { User } from 'src/app/auth/user.model';
 import { Store } from '@ngrx/store';
 import * as fromAppState from '../../store/app.reducer';
 import { map } from 'rxjs/operators';
 import * as AuthActions from '../../auth/store/auth.actions';
+import * as RecipeActions from '../../features/recipe/store/recipe.actions';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Output() featureSelected = new EventEmitter<string>();
 
-  constructor(private dataService: PostService, private authService: LoginService, private store: Store<fromAppState.AppState>) { }
+  constructor(private store: Store<fromAppState.AppState>) { }
 
   ngOnInit(): void {
     this.authSubscription = this.store.select('auth').pipe(map(authState => {
@@ -33,11 +32,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dataService.storeRecipe();
+    // this.dataService.storeRecipe();
+    this.store.dispatch(new RecipeActions.StoreRecipe());
   }
 
   loadRecipes() {
-    this.dataService.loadRecipes().subscribe();
+    // this.dataService.loadRecipes().subscribe();
+    this.store.dispatch(new RecipeActions.FetchRecipe());
   }
 
   onSelect(feature: string){

@@ -18,17 +18,15 @@ export class AuthGaurd implements CanActivate {
         return this.store.select('auth').pipe(
             take(1),
             map(authState => {
-                console.log(authState,'djdjjdjdd')
                 return authState.user;
             }),
             map(user => {
-            // return !!user;
-            console.log('user',user);
             const isAuth = !!user;
+            console.log(user,'user');
             if (isAuth) {
-                console.log('in');
                 return true;
             } else {
+                console.log('dddhdhdh', user);
                 return this.router.createUrlTree(['/auth']);
             }
         })

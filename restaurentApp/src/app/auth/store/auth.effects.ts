@@ -28,7 +28,8 @@ const handleAuthentication = (email: string, userId: string, token: string, expi
             email: email,
             userId: userId,
             token: token,
-            expirationDate: expirationDate
+            expirationDate: expirationDate,
+            redirect: true
         }
     );
 };
@@ -86,11 +87,14 @@ export class AuthEffects {
     @Effect({ dispatch: false })
     authRedirect = this.actions$.pipe(
         ofType(AuthActions.AUTHENTICATE_SUCCESS),
-        tap(() => {
-            this.router.navigate(['/']);
-
+        tap(((authSuccessAction: AuthActions.AuthenticateSuccess) => {
+            console.log(authSuccessAction.payload.redirect,'authSuccessAction.payload.redirect');
+            if (authSuccessAction.payload.redirect) {
+                console.log('test-ebfre')
+                this.router.navigate(['/']);
+            }
         })
-    );
+        ));
 
     @Effect({ dispatch: false })
     authLogout = this.actions$.pipe(
@@ -117,6 +121,7 @@ export class AuthEffects {
                     type: 'DUMMY'
                 };
             }
+            console.log('inside map')
             const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
 
             if (loadedUser.token) {
@@ -130,7 +135,8 @@ export class AuthEffects {
                         email: loadedUser.email,
                         userId: loadedUser.id,
                         token: loadedUser.token,
-                        expirationDate: new Date(userData._tokenExpirationDate)
+                        expirationDate: new Date(userData._tokenExpirationDate),
+                        redirect: false
                     }
                 );
             }
