@@ -32,6 +32,6 @@ export class RecipesResolver implements Resolve<Recipe[]>{
                     return of(recipes);
                 }
             })
-        )
+        );
     }
 }

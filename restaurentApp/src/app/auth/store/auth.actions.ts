@@ -39,7 +39,7 @@ export class HandleError implements Action {
 }
 
 export class AutoLogin implements Action {
-    readonly type = AUTO_LOGIN
+    readonly type = AUTO_LOGIN;
 }
 
 export type AuthActions =
